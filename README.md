@@ -134,7 +134,7 @@ Download link: [`百度网盘`](https://pan.baidu.com/s/1pLXGqx1 "DJI N3")
 
 
 ADIS16448: `200Hz`
- 
+
 Download link:[`百度网盘`](https://pan.baidu.com/s/1dGd0mn3 "ADIS16448")
 
 3dM-GX4: `500Hz`
@@ -144,3 +144,28 @@ Download link:[`百度网盘`](https://pan.baidu.com/s/1ggcan9D "GX4")
 xsens-MTI-100: `100Hz`
 
 Download link:[`百度网盘`](https://pan.baidu.com/s/1i64xkgP "MTI-100")
+
+
+
+## 注意
+
+1. catkin_make 的时候，由于`imu_utils` 依赖 `code_utils` ，所以最好先编译  `code_utils`  ，然后再编译`imu_utils`
+
+```bash
+catkin_make --only-pkg-with-deps code_utils
+catkin_make --only-pkg-with-deps imu_utils
+```
+
+2. 编译  `code_utils` 的时候，可能会报错：
+
+```bash
+code_utils-master/src/sumpixel_test.cpp:2:10: fatal error: backward.hpp: No such file or directory
+ #include "backward.hpp"
+```
+
+解决方法：
+
+在`code_utils`下面找到  src/sumpixel_test.cpp，修改 `#include "backward.hpp" `为  ` #include "code_utils/backward.hpp"  `，再编译。
+
+
+
